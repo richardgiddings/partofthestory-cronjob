@@ -1,4 +1,5 @@
 import psycopg
+import sys
 from decouple import config
 
 DB_HOST     = config('DB_HOST')
@@ -42,6 +43,10 @@ with psycopg.connect(DATABASE_URL) as conn:
         )
         story_ids_of_expired_parts = [record[0] for record in cur]
         print(f"Stories ids with expired parts {story_ids_of_expired_parts}")
+
+        if not story_ids_of_expired_parts:
+            print("Stopping execution as there are no expired parts")
+            sys.exit(1)
 
 
         # If a story's latest part has not been completed in 3 days
