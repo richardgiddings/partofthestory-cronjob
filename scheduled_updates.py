@@ -46,7 +46,7 @@ with psycopg.connect(DATABASE_URL) as conn:
 
         if not story_ids_of_expired_parts:
             print("Stopping execution as there are no expired parts")
-            sys.exit(1)
+            sys.exit(0)
 
 
         # If a story's latest part has not been completed in 3 days
